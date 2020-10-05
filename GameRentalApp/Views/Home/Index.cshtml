@@ -1,0 +1,93 @@
+﻿@model GameRentalApp.Models.GamesViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+    <div class="jumbotron" style="background-image:url(/Images/Video-Games-Blog.jpg);background-size:cover">
+        <h1 style="color:white">Online Video Game Rental</h1>
+        <hr style="width:50%" />
+        <h4 style="color:white">Thousands of new releases</h4>
+        <hr style="width:50%" />
+        <h4 style="color:white">Large library of classic games</h4>
+        <hr style="width:50%" />
+        <h4 style="color:white">Games for all ages</h4>
+        <hr style="width:50%" />
+    </div>
+
+Rent
+<div class="row">
+    <h4>Rent Xbox games for less than 5$</h4>
+    <div class="container">
+        @{var numofxGames = 0; }
+
+        @foreach (GameRentalApp.Models.XBoxGame xBoxGame in Model.xboxGames)
+        {
+            if (xBoxGame.Price <= 5 && numofxGames != 6 && xBoxGame.AvailableCopies > 0)
+            {
+                numofxGames++;
+                <span class="card ml-2 mr-2" style="width: 10em;height:14em;;display:inline-block">
+                    <a href="/XBoxGames/Rent/@xBoxGame.XboxID">
+                        <img style="height:14em;width:10em" src="@xBoxGame.ImgUrl" alt="">
+                    </a>
+                </span>
+            }
+        }
+    </div>
+</div>
+<br />
+<div class="row">
+    <h4>Rent Sony games for less than 5$</h4>
+    <div class="container">
+        @{ var numSony = 0;}
+        @foreach (GameRentalApp.Models.SonyGame sonyGame in Model.sonyGames)
+        {
+            if (sonyGame.Price <= 5 && numSony <= 6 && sonyGame.AvailableCopies > 0)
+            {
+                numSony++;
+                <div class="card ml-2 mr-2" style="width: 10em;height:14em">
+                    <a href="/SonyGames/Rent/@sonyGame.SonyID">
+                        <img img style="height:14em;width:10em" src="@sonyGame.ImgUrl" alt="">
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>
+<br />
+<div class="row">
+    <h4>Rent PC games for less than 5$</h4>
+    <div class="container">
+        @{ var numPC = 0;}
+        @foreach (GameRentalApp.Models.PCGame pCGame in Model.pcGames)
+        {
+            if (pCGame.Price <= 5 && numPC <= 6 && pCGame.AvailableCopies > 0)
+            {
+                numPC++;
+                <div class="card ml-2 mr-2" style="width: 10em;height:14em">
+                    <a href="/PCGames/Rent/@pCGame.PCID">
+                        <img img style="height:14em;width:10em" src="@pCGame.ImgUrl" alt="">
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>
+<br />
+<div class="row">
+    <h4>Rent Switch games for less than 5$</h4>
+    <div class="container">
+        @{ var numSW = 0;}
+        @foreach (GameRentalApp.Models.SwitchGame switchGame in Model.switchGames)
+        {
+            if (switchGame.Price <= 5 && numSW <= 6 && switchGame.AvailableCopies>0)
+            {
+                numSW++;
+                <div class="card ml-2 mr-2" style="width: 10em;height:14em">
+                    <a href="/SwitchGames/Rent/@switchGame.SwitchID">
+                        <img img style="height:14em;width:10em" src="@switchGame.ImgUrl" alt="">
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>

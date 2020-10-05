@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <a class="navbar-brand" href="/">GameRent</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/XboxGames/">XBox Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/PCGames/">PC Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/SonyGames/">Sony Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/SwitchGames/">Switch Games</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-inline float-right">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <div >
+        <footer class="bg-dark text-center">
+            <p style="color:white" class="">&copy; @DateTime.Now.Year - GameRent Application</p>
+            <a class="nav-link" href="/SwitchGames/">Switch Games</a>
+            <a class="nav-link" href="/SonyGames/">Sony Games</a>
+            <a class="nav-link" href="/PCGames/">PC Games</a>
+            <a class="nav-link" href="/XboxGames/">XBox Games</a>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<GameRentalApp.Models.SwitchGame>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2></h2>
+@if (User.IsInRole("Admin"))
+{
+    <a>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </a>
+    <h2></h2>
+}
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        @{
+            var first = true;
+        }
+        @foreach (var item in Model)
+        {
+            <div class="carousel-item @(first?Html.Raw("active"):Html.Raw(""))">
+                <img class="d-block" style="width:100%;height:35em" src="@item.ImgUrl" alt="@item.GameName">
+            </div>
+            first = false;
+        }
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+       data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+       data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<br />
+<div>
+    <h4>Games for rent</h4>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        if (item.AvailableCopies == 0)
+        {
+            <div class="card ml-2 mr-2 disabled" style="width: 18.5rem; border:2px solid gray;">
+                <img class="card-img-top" style="width:100%; filter:grayscale(100%); height:60%" src="@Html.DisplayFor(modelItem => item.ImgUrl)" alt="Card image cap">
+
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.GameName)</h5>
+                    <p class="card-text">Number of available copies : @Html.DisplayFor(modelItem => item.AvailableCopies)</p>
+                    <p class="card-text">Genre: @Html.DisplayFor(modelItem => item.Genre)</p>
+                    <a>@Html.ActionLink("Rent A Copy", "Rent", new { id = item.SwitchID }, new { @class = "btn btn-primary disabled" })</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a>@Html.ActionLink("Edit", "Edit", new { id = item.SwitchID }, new { @class = "btn btn-primary " })</a>
+                        <a>@Html.ActionLink("Delete", "Delete", new { id = item.SwitchID }, new { @class = "btn btn-danger " })</a>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card ml-2 mr-2" style="width: 18.5rem; border:2px solid gray;">
+                <img class="card-img-top" style="width:100%; height:60%" src="@Html.DisplayFor(modelItem => item.ImgUrl)" alt="Card image cap">
+
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.GameName)</h5>
+                    <p class="card-text">Number of available copies : @Html.DisplayFor(modelItem => item.AvailableCopies)</p>
+                    <p class="card-text">Genre: @Html.DisplayFor(modelItem => item.Genre)</p>
+                    <a>@Html.ActionLink("Rent A Copy", "Rent", new { id = item.SwitchID }, new { @class = "btn btn-primary " })</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a>@Html.ActionLink("Edit", "Edit", new { id = item.SwitchID }, new { @class = "btn btn-primary " })</a>
+                        <a>@Html.ActionLink("Delete", "Delete", new { id = item.SwitchID }, new { @class = "btn btn-danger" })</a>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+

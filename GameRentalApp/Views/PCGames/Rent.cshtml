@@ -1,0 +1,63 @@
+﻿@model GameRentalApp.Models.PCGame
+
+@{
+    ViewBag.Title = "Rent";
+}
+
+<h2>Rent</h2>
+<br />
+<div>
+    <h4>Are you sure you want to rent this game?</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailableCopies)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailableCopies)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @if (Model.AvailableCopies == 0)
+            {
+                <input type="submit" value="Rent" class="btn btn-default" disabled /> @Html.Raw("|")
+            }
+            else
+            {
+                <input type="submit" value="Rent" class="btn btn-success" /> @Html.Raw("|")
+
+            }
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
